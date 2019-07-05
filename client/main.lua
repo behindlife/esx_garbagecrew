@@ -87,6 +87,7 @@ AddEventHandler('esx_garbagejob:setbin', function(binpos, platenumber,  bags)
 			paused = true
 			CurrentActionMsg = ''
 			CollectionAction = 'collection'
+			iscurrentboss = false
 		end
 	end
 end)
@@ -690,7 +691,7 @@ Citizen.CreateThread(function()
 				if CurrentAction == 'delivery' then
 					SelectBinandCrew()
 					while work_truck == nil do
-						Citizen.Wait(0)
+						Citizen.Wait(100)
 					end
 					iscurrentboss = true
 					SetVehicleDoorOpen(work_truck,5,false, false)
