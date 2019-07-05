@@ -392,7 +392,6 @@ function nouvelledestination()
 	else
 	multibagpay = totalbagpay
 	end
-	local testprint = (destination.Paye + multibagpay)
 	local temppayamount =  (destination.Paye + multibagpay) / (count + 1)
 	TriggerServerEvent('esx_garbagejob:requestpay', platenumb,  temppayamount)
 	livraisonTotalPaye = 0
@@ -400,6 +399,7 @@ function nouvelledestination()
 	temppayamount = 0
 	temppaytable = nil
 	multibagpay = 0
+	iscurrentboss = false
 	
 	if livraisonnombre >= Config.MaxDelivery then
 		MissionLivraisonStopRetourDepot()
@@ -463,7 +463,7 @@ function retourcamionperdu_oui()
 	MissionRetourCamion = false
 	livraisonnombre = 0
 	MissionRegion = 0
-	
+	iscurrentboss = false
 	donnerlapayesanscamion()
 end
 
@@ -485,7 +485,8 @@ function retourcamionannulermission_oui()
 	MissionLivraison = false
 	livraisonnombre = 0
 	MissionRegion = 0
-	
+	retourcamionannulermission_oui
+	iscurrentboss = false
 	donnerlapaye()
 end
 
@@ -507,7 +508,7 @@ function retourcamionperduannulermission_oui()
 	MissionLivraison = false
 	livraisonnombre = 0
 	MissionRegion = 0
-	
+	iscurrentboss = false
 	donnerlapayesanscamion()
 end
 
@@ -950,6 +951,8 @@ function MissionLivraisonStopRetourDepot()
 	MissionLivraison = false
 	MissionNum = 0
 	MissionRetourCamion = true
+
+	
 end
 
 function SavePlaqueVehicule()
@@ -958,5 +961,4 @@ end
 
 function VerifPlaqueVehiculeActuel()
 	plaquevehiculeactuel = GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1), false))
-end
-								
+end						
